@@ -1,0 +1,10 @@
+#search {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+#map-canvas {
+    width: 775px;
+    height: 650px;
+    background-color: #ccc;
+}
