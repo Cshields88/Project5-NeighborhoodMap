@@ -79,7 +79,7 @@
                             <h3 class="panel-title">Location 1</h3>
                         </div>
                         <div class="panel-body">
-                            Panel content
+                            <p>Panel Content</p>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,19 @@
 
                 <div class="col-sm-8 pull-right" id="map-canvas"></div>
 
-
+                <!--
+                <script>
+                    function initMap() {
+                        var mapDiv = document.getElementById('map-canvas');
+                        var map = new google.maps.Map(mapDiv, {
+                            center: {
+                                lat: 44.540,
+                                lng: -78.546
+                            },
+                            zoom: 8
+                        });
+                    }
+                </script> -->
 
 
             </div>
@@ -95,8 +107,12 @@
     </div>
 
 
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
     <script src="js/app.js"></script>
+    <script src="js/knockout-3.4.0.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiCVShMaFxre13ZU7DGRsclu9iY_X5-cg&callback=initMap"></script>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
