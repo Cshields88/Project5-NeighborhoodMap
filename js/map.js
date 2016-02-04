@@ -16,6 +16,7 @@
 
 
   function MarkerViewModel(){
+    var self = this;
 
     // var markers = ko.observableArray([
     //   {name: 'Founders Brewing Co.', lat: 42.9584, lng: -85.6742},
@@ -27,19 +28,19 @@
     // ])
 
 
-    var markers = [
+    self.markers = [
       {name: 'Founders Brewing Co.', lat: 42.9584, lng: -85.6742},
       {name: 'Bells Brewery', lat: 42.285110, lng: -85.449972},
       {name: 'New Holland Brewing Co.', lat: 42.790067, lng: -86.104204},
       {name: 'Shorts Brewing Co.', lat: 44.976315, lng: -85.210035},
       {name: 'Dark Horse Brewing Co.', lat: 42.266260, lng: -84.963444},
       {name: 'Atwater Brewery', lat: 42.337311, lng: -83.018083}
-    ]
+    ];
 
   function markerDisplay() {
-      for (var i = 0; i < markers.length; i++) {
-        var name = markers[i].name;
-        var latlng = new google.maps.LatLng(markers[i].lat, markers[i].lng);
+      for (var i = 0; i < self.markers.length; i++) {
+        this.name = self.markers[i].name;
+        this.latlng = new google.maps.LatLng(self.markers[i].lat, self.markers[i].lng);
 
         createMarker(latlng, name);
       }
@@ -57,7 +58,7 @@
 
 MarkerViewModel();
 
-// ko.applyBindings(MarkerViewModel());
+// ko.applyBindings(new MarkerViewModel());
 
 
 }(window, google));
