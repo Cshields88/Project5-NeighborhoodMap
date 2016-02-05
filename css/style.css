@@ -4,9 +4,10 @@
 }
 
 #map-canvas {
-    width: 775px;
-    height: 500px;
+    width: 65%;
+    height: 900px;
     background-color: #ccc;
+    display: absolute;
 }
 
 .heading{
