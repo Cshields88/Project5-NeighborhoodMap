@@ -4,24 +4,31 @@
 }
 
 #map-canvas {
-    width: 65%;
-    height: 900px;
+    width: 800px;
+    height: 600px;
     background-color: #ccc;
     display: absolute;
 }
 
-.heading{
-  font-family: 'Fredericka the Great', cursive;
-  font-size: 66px;
-  color:  #F01124;
+.heading {
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 66px;
+    color: #F01124;
 }
 
-.places{
-  font-family: 'Josefin Slab', serif;
-  font-weight: 600;
-  font-size: 24px;
+.places {
+    font-family: 'Josefin Slab', serif;
+    font-weight: 600;
+    font-size: 24px;
 }
 
-.searchBar{
-  font-family: 'Josefin Slab', serif;
+.searchBar {
+    font-family: 'Josefin Slab', serif;
+}
+.iWindow{
+  width: 100%;
+}
+.iText{
+  text-align: center;
+  padding-left: 10px;
 }

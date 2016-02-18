@@ -20,11 +20,11 @@
 <body>
 
     <div class="container">
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <h1 class="heading">Michigan's 10 Best Breweries</h1>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1 class="heading">Michigan's 10 Best Breweries</h1>
+            </div>
         </div>
-      </div>
         <div class="row">
             <!--Search Bar -->
             <div class="col-xs-12 input-group input-group-lg" id="search">
@@ -34,20 +34,19 @@
 
             <!--Contents Panel -->
             <div class="row">
-                <div class="col-xs-4 places pull-left list-group">
-                  <button type="button" class="list-group-item btn-danger">Location 1</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 2</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 3</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 4</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 5</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 6</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 7</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 8</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 9</button><br>
-                  <button type="button" class="list-group-item btn-danger">Location 10</button><br>
+                <div class="col-sm-4">
+                    <ul class="list-group" data-bind="foreach: locations">
+                        <li class="list-group-item list-group-item-danger">
+                            <span data-bind="text: name"></span>
+                        </li>
+                        <br>
+                    </ul>
+                  
                 </div>
-                <!-- Places Closing Div -->
 
+
+
+                <!-- Places Closing Div -->
                 <div class="col-sm-8 pull-right flexible-container" id="map-canvas"></div>
             </div>
         </div>
