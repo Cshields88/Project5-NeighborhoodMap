@@ -78,6 +78,7 @@
         this.name = ko.observable(name);
         this.lat = ko.observable(lat);
         this.lng = ko.observable(lng);
+        this.marker = '';
     };
 
     function ViewModel() {
@@ -95,17 +96,23 @@
 
 
         function createMarker(latlng, name) {
+
+            infowindow = new google.maps.InfoWindow({
+                content: name
+            });
             marker = new google.maps.Marker({
                 map: map,
                 position: latlng,
                 title: name,
                 animation: google.maps.Animation.DROP,
                 icon: 'icons/beer.png',
-                content: locations().name
+                //                content: locations().name
             });
-            //            marker.addListener('click', toggleBounce, function () {
-            //                infoWindow.open(map, this);
-            //            });
+            marker.addListener('click', toggleBounce);
+            marker.addListener('click', function () {
+                //                toggleBounce();
+                infowindow.open(map, this);
+            });
 
             function toggleBounce() {
                 if (marker.getAnimation() !== null) {
@@ -115,47 +122,10 @@
                 }
             };
 
-            infoWindow = new google.maps.InfoWindow();
-
-            google.maps.event.addListener(map, 'click', toggleBounce, function () {
-                infoWindow.open(map, marker);
-            });
-
-
 
         };
         markerDisplay();
 
-
-
-
-
-
-
-
-        //TO DO Fix!!!
-
-        //            var contentString = '<div class="iWindow row">' + '<h3 class="iText">' + locations()[0].push + '</h3>' + '</div>';
-        //            var infowindow = new google.maps.InfoWindow({
-        //               content: contentString
-        //             });
-        //             marker.addListener('click', function() {
-        //             infowindow.open(map, this);
-        //             });
-        //
-        //        console.log(locations()[2].name);
-        //
-        //        function addInfoWindow(marker, name) {
-        //
-        //            var infoWindow = new google.maps.InfoWindow({
-        //                content: this.name
-        //            });
-        //
-        //            google.maps.event.addListener(marker, 'click', function () {
-        //                infoWindow.open(map, marker);
-        //            });
-        //        }
-        //        addInfoWindow(marker, locations[i].name);
     };
 
 
