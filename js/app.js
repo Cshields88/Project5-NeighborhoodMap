@@ -74,15 +74,18 @@
             }
     ]);
 
-    var placeInfo = function () {
-        this.name = ko.observable(name);
-        this.lat = ko.observable(lat);
-        this.lng = ko.observable(lng);
-        this.marker = '';
-    };
+
 
     function ViewModel() {
         var self = this;
+
+        var placeInfo = function () {
+            this.name = ko.observable(name);
+            this.lat = ko.observable(lat);
+            this.lng = ko.observable(lng);
+            this.marker = '';
+        };
+
 
 
         function markerDisplay(name) {
@@ -92,14 +95,12 @@
                 createMarker(latlng, name);
             }
 
+
         };
 
 
         function createMarker(latlng, name) {
 
-            infowindow = new google.maps.InfoWindow({
-                content: name
-            });
             marker = new google.maps.Marker({
                 map: map,
                 position: latlng,
@@ -108,11 +109,20 @@
                 icon: 'icons/beer.png',
                 //                content: locations().name
             });
+
+
+
+            self.infowindow = new google.maps.InfoWindow({
+                content: name
+            });
+
+
+
             marker.addListener('click', toggleBounce);
             marker.addListener('click', function () {
-                //                toggleBounce();
-                infowindow.open(map, this);
+                self.infowindow.open(map, marker)
             });
+
 
             function toggleBounce() {
                 if (marker.getAnimation() !== null) {
@@ -124,9 +134,11 @@
 
 
         };
+
+
         markerDisplay();
 
     };
 
 
-    ko.applyBindings(ViewModel());
+    ko.applyBindings(new ViewModel());
