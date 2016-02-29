@@ -83,62 +83,60 @@
             this.name = ko.observable(name);
             this.lat = ko.observable(lat);
             this.lng = ko.observable(lng);
-            this.marker = '';
         };
 
 
 
-        function markerDisplay(name) {
+        function markerCreate(latlng, name, marker, attachInfowindow, markerId) {
             for (i = 0; i < locations().length; i++) {
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: latlng,
+                    title: name,
+                    animation: google.maps.Animation.DROP,
+                    icon: 'icons/beer.png',
+
+                });
                 latlng = new google.maps.LatLng(locations()[i].lat, locations()[i].lng);
-                name = locations()[i].name;
-                createMarker(latlng, name);
+                markerId = locations()[i].name;
+                attachInfowindow(marker, markerId);
             }
 
 
-        };
+
+            function attachInfowindow(marker, markerId) {
+                infowindow = new google.maps.InfoWindow();
+                marker.infowindow = infowindow;
+                content = markerId;
+                infowindow.setContent(content);
+
+                marker.addListener('click', function () {
+                    if (marker.getAnimation() !== null) {
+                        marker.setAnimation(null);
+                    } else {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                        setTimeout(function () {
+                            marker.setAnimation(null);
+                        }, 1200);
+                    }
+
+                });
+                marker.addListener('click', function () {
+                    return marker.infowindow.open(map, marker);
+                });
 
 
-        function createMarker(latlng, name) {
-
-            marker = new google.maps.Marker({
-                map: map,
-                position: latlng,
-                title: name,
-                animation: google.maps.Animation.DROP,
-                icon: 'icons/beer.png',
-                //                content: locations().name
-            });
-
-
-
-            self.infowindow = new google.maps.InfoWindow({
-                content: name
-            });
-
-
-
-            marker.addListener('click', toggleBounce);
-            marker.addListener('click', function () {
-                self.infowindow.open(map, marker)
-            });
-
-
-            function toggleBounce() {
-                if (marker.getAnimation() !== null) {
-                    marker.setAnimation(null);
-                } else {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                }
             };
 
+        }
 
-        };
+        markerCreate();
 
 
-        markerDisplay();
+        //Wikipedia API
 
-    };
 
+
+    }; //ViewModel End
 
     ko.applyBindings(new ViewModel());
