@@ -1,5 +1,5 @@
     //Initialize Map
-    var map, mapDiv, infowindow;
+    var map, mapDiv;
 
     function initMap() {
         mapDiv = document.getElementById('map-canvas');
@@ -9,7 +9,7 @@
                 lng: -84.7675
             },
             zoom: 7,
-            draggable: false
+            draggable: true
         })
     };
 
@@ -21,7 +21,7 @@
 
 
     //Locations Array holding Marker Properties
-    var locations = ko.observableArray([
+    var locations = [
         {
             name: 'Founders Brewing Co.',
             lat: 42.9584,
@@ -72,7 +72,7 @@
             lat: 42.083974,
             lng: -83.674940
             }
-    ]);
+    ];
 
 
 
@@ -80,36 +80,33 @@
         var self = this;
 
         var placeInfo = function () {
-            this.name = ko.observable(name);
-            this.lat = ko.observable(lat);
-            this.lng = ko.observable(lng);
+            self.name = ko.observable(name);
+            self.lat = ko.observable(lat);
+            self.lng = ko.observable(lng);
+            self.infowindow = ko.observable(infowindow);
+            self.locations = ko.observableArray(locations);
         };
 
 
-
-        function markerCreate(latlng, name, marker, attachInfowindow, markerId) {
-            for (i = 0; i < locations().length; i++) {
+        function markerCreate() {
+            for (i = 0; i < locations.length; i++) {
+                latlng = new google.maps.LatLng(locations[i].lat, locations[i].lng);
                 marker = new google.maps.Marker({
                     map: map,
                     position: latlng,
                     title: name,
                     animation: google.maps.Animation.DROP,
                     icon: 'icons/beer.png',
-
                 });
-                latlng = new google.maps.LatLng(locations()[i].lat, locations()[i].lng);
-                markerId = locations()[i].name;
+                markerId = locations[i].name;
                 attachInfowindow(marker, markerId);
-            }
-
-
+            };
 
             function attachInfowindow(marker, markerId) {
                 infowindow = new google.maps.InfoWindow();
                 marker.infowindow = infowindow;
                 content = markerId;
                 infowindow.setContent(content);
-
                 marker.addListener('click', function () {
                     if (marker.getAnimation() !== null) {
                         marker.setAnimation(null);
@@ -119,21 +116,21 @@
                             marker.setAnimation(null);
                         }, 1200);
                     }
-
                 });
                 marker.addListener('click', function () {
-                    return marker.infowindow.open(map, marker);
+                    marker.infowindow.open(map, marker);
                 });
-
-
             };
-
-        }
-
+        };
         markerCreate();
 
 
+        //Search Filtering
+
+
+
         //Wikipedia API
+
 
 
 
