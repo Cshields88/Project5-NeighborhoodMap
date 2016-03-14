@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Josefin+Slab:400,600' rel='stylesheet' type='text/css'>
+
     <!--[if IE]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -25,30 +26,27 @@
                 <h1 class="heading">Michigan's 10 Best Breweries</h1>
             </div>
         </div>
+
         <div class="row">
-            <!--Search Bar -->
-            <div class="col-xs-12 input-group input-group-lg" id="search">
-                <span class="input-group-addon  searchBar" id="sizing-addon1">Search</span>
-                <input type="text" class="form-control" placeholder="Search Locations">
-            </div>
-
-            <!--Contents Panel -->
-            <div class="row">
-                <div class="col-sm-4">
-                    <ul class="list-group" data-bind="foreach: locations">
-                        <li class="list-group-item list-group-item-danger">
-                            <span data-bind="text: name"></span>
-                        </li>
-                        <br>
-                    </ul>
-                  
+            <div class="col-lg-12" id="search">
+                <div class="input-group">
+                    <input id="search" type="search" data-bind="value: search, valueUpdate: 'afterkeydown'" placeholder="Search Locations">
                 </div>
-
-
-
-                <!-- Places Closing Div -->
-                <div class="col-sm-8 pull-right flexible-container" id="map-canvas"></div>
             </div>
+        </div>
+        <!-- /input-group -->
+
+        <!--Contents Panel -->
+        <div class="row">
+            <div class="col-sm-4">
+                <ul class="list-group" data-bind="foreach:locations">
+                    <a href="#" class="list-group-item list-group-item-danger col-xs-6 col-md-12" id="list" data-bind="click:list">
+                        <p id="list" data-bind="text:$data.name"></p>
+                    </a>
+                </ul>
+            </div>
+            <!-- Places Closing Div -->
+            <div class="col-sm-8 pull-right flexible-container" id="map-canvas"></div>
         </div>
     </div>
 
