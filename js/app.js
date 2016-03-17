@@ -18,7 +18,7 @@
     function ViewModel() {
         var self = this;
 
-        self.locations = [
+        locations = [
             {
                 name: 'Founders Brewing Co.',
                 lat: 42.9584,
@@ -74,41 +74,38 @@
 
         function placeInfo() {
             self.name = ko.observable(name);
-            self.lat = lat;
-            self.lng = lng;
-
             self.locations = ko.observableArray(locations);
-            self.marker = ko.observable([]);
+            self.marker = ko.observable('');
             self.search = ko.observable('');
             self.list = ko.observable(function () {
-                //TO DO
+                alert(self.name);
 
             });
         };
 
+        var infowindow; //Creates instance of infowindow
 
-        function markerCreate() {
-            for (i = 0; i < self.locations.length; i++) {
-                latlng = new google.maps.LatLng(self.locations[i].lat, self.locations[i].lng);
-                marker = new google.maps.Marker({
-                    map: map,
-                    position: latlng,
-                    title: name,
-                    animation: google.maps.Animation.DROP,
-                    icon: 'icons/beer.png',
+        //Loops through locations array
+        for (var i = 0; i < locations.length; i++) {
+            latlng = new google.maps.LatLng(locations[i].lat, locations[i].lng);
+            marker = new google.maps.Marker({
+                map: map,
+                position: latlng,
+                title: name,
+                animation: google.maps.Animation.DROP,
+                icon: 'icons/beer.png',
+            });
+            //Wrapped the event listeners in an anonymous function to work as a closure, allowing only one infowindow to be opened at a time.
+            (function (i, marker) {
+                google.maps.event.addListener(marker, 'click', function () {
+                    //if statement checks to see if an infowindow exists, if not it will create one
+                    if (!infowindow) {
+                        infowindow = new google.maps.InfoWindow();
+                    }
+                    infowindow.setContent(locations[i].name);
+                    infowindow.open(map, marker);
                 });
-                markerId = self.locations[i].name;
-
-                infowindow = new google.maps.InfoWindow({
-                    content: markerId
-                });
-                attachInfowindow(marker, markerId);
-            };
-
-            function attachInfowindow(marker, markerId) {
-
-                marker.infowindow = '';
-                marker.addListener('click', function () {
+                google.maps.event.addListener(marker, 'click', function () {
                     if (marker.getAnimation() !== null) {
                         marker.setAnimation(null);
                     } else {
@@ -118,13 +115,8 @@
                         }, 1200);
                     }
                 });
-                marker.addListener('click', function () {
-                    infowindow.open(map, marker);
-                });
-            };
-
-        };
-        markerCreate();
+            }(i, marker));
+        }; //End For Loop
 
         //Search Filtering
 
@@ -132,6 +124,7 @@
         //Wikipedia API
         //
         //
+
 
 
     }; //ViewModel End
