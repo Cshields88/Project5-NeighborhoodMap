@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href='https://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Josefin+Slab:400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Slab:100,400,600' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 
     <!--[if IE]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 
 <body>
@@ -38,27 +41,32 @@
 
         <!--Contents Panel -->
         <div class="row">
-            <div class="col-sm-4">
-                <ul class="list-group" data-bind="foreach:locations">
-                    <a href="#" class="list-group-item list-group-item-danger col-xs-6 col-md-12" id="list" data-bind="click:list">
+            <div class="col-lg-4 col-xs-12">
+                <ul id="list" class="list-group" data-bind="foreach:locations">
+                    <a href="#" class="list-group-item col-xs-6 col-md-12" id="list" data-bind="click:list">
                         <p id="list" data-bind="text:$data.name"></p>
                     </a>
                 </ul>
             </div>
             <!-- Places Closing Div -->
-            <div class="col-sm-8 pull-right flexible-container" id="map-canvas"></div>
+            <div class="col-sm-8 col-xs-8 img-responsive" id="map-canvas"></div>
+            <div id="copy" class="col-xs-12 text-center">&copy; 2015 | Chris Shields</div>
         </div>
     </div>
 
 
     <script src="js/knockout-3.4.0.js"></script>
     <!-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiCVShMaFxre13ZU7DGRsclu9iY_X5-cg&callback=initMap"></script> -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?"></script>
+    <script>
+        function googleSuccess() {
+            alert("Google Has Encountered An Error.Please Try Again Later");
+        }
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?" onerror="googleError()"></script>
+
     <!-- <script src="js/map.js"></script> -->
     <script src="js/app.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </body>
 
