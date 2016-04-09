@@ -4,6 +4,9 @@
  It also incorporates the Wikipedia API for more information on each brewery.
 
 
+![Screenshot of Application](screenshot.png)
+
+
 ## How To Use
 
 1. Open the index.html file in a browser, or on a local server.
