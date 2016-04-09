@@ -1,16 +1,18 @@
 # Udacity FEND Neighborhbood Map Project
 
-##### This Application shows in my opinion the 10 best breweries Michigan has to offer.  It includes a search function, a clickable list, and a map of the locations.
-##### It also incorporates the Wikipedia API for more information on each brewery.
+ This Application shows in my opinion the 10 best breweries Michigan has to offer.  It includes a search function, a clickable list, and a map of the locations.
+ It also incorporates the Wikipedia API for more information on each brewery.
 
 
 ## How To Use
 
-### Open the index.html file in a browser, or on a local server.
+1. Open the index.html file in a browser, or on a local server.
 
-##### When the list on the left is clicked, the infowindow will show information about each brewery from Wikipedia.
-##### If a marker is clicked an infowindow will display the name of the brewery and also the website url.
-##### To search for a specific brewery, you can type the name in the search bar and only the brewery you have searched for will be displayed.
+2. When the list on the left is clicked, the infowindow will show information about each brewery from Wikipedia.
+
+3. If a marker is clicked an infowindow will display the name of the brewery and also the website url.
+
+4. To search for a specific brewery, you can type the name in the search bar and only the brewery you have searched for will be displayed.
 
 
 

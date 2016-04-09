@@ -1,10 +1,10 @@
 //Initialize Map
-var map, marker;
+var marker;
 
 
 function initMap() {
 
-    map = new google.maps.Map(document.getElementById('map-canvas'), { //Map Data
+    var map = new google.maps.Map(document.getElementById('map-canvas'), { //Map Data
         center: {
             lat: 45.5978,
             lng: -84.7675
@@ -122,7 +122,6 @@ function initMap() {
                 }, 1100);
             });
 
-            console.log(self.allPlaces);
         }); //End ForEach
 
         //Populates Infowindows with API information, and is also linked to Click Event Binding
@@ -179,40 +178,31 @@ function initMap() {
                 }
             }
         };
-        console.log(self.list);
+
+
 
 
         // Search functionality on location names
         self.query = ko.observable(''); //Creates an observable for the search bar
 
 
-        self.search = ko.computed(function (place) {
-            var filter = self.query().toLowerCase();
 
-            if (filter === false) {
-                self.allPlaces().forEach(function (place) {
-                    place.marker.setVisible(true);
-                });
-            } else {
-                return ko.utils.arrayFilter(self.allPlaces(), function (place) {
-                    var filtered = place.name.toLowerCase().indexOf(filter) >= 0;
-                    if (filtered === true) {
-                        place.marker.setVisible(true);
-                    } else {
-                        place.marker.setVisible(false);
+        self.searchResults = ko.computed(function () {
+            return ko.utils.arrayFilter(self.allPlaces(), function (list) {
+                //Match search with items in sortedLocations() observable array
+                var listFilter = list.name.toLowerCase().indexOf(self.query().toLowerCase()) >= 0;
 
-                    }
-                });
-            }
-        }, self);
+                if (listFilter) { //if user input matches any of the brewery names, show only the matches
+                    list.marker.setVisible(true);
 
-        console.log(self.search);
+                } else {
+                    list.marker.setVisible(false); //hide markers and list items that do not match results
+                }
 
+                return listFilter;
 
-
-
-
-
+            });
+        });
 
     }; //ViewModel End
     ko.applyBindings(new ViewModel());
