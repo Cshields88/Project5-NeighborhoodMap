@@ -119,8 +119,10 @@ function initMap() {
                 place.marker.setAnimation(google.maps.Animation.BOUNCE);
                 setTimeout(function () {
                     place.marker.setAnimation(null);
-                }, 1500);
+                }, 1100);
             });
+
+            console.log(self.allPlaces);
         }); //End ForEach
 
         //Populates Infowindows with API information, and is also linked to Click Event Binding
@@ -177,23 +179,35 @@ function initMap() {
                 }
             }
         };
+        console.log(self.list);
+
+
         // Search functionality on location names
         self.query = ko.observable(''); //Creates an observable for the search bar
 
-        self.search = ko.computed(function () {
-            ko.utils.arrayFilter(self.allPlaces(), function (place) {
 
-                var filter = place.name.toLowerCase().indexOf(self.query().toLowerCase()) >= 0; //Filters Location Markers on map.
+        self.search = ko.computed(function (place) {
+            var filter = self.query().toLowerCase();
 
-                if (filter === true) { //if letters typed match any letters of location names show results
+            if (filter === false) {
+                self.allPlaces().forEach(function (place) {
                     place.marker.setVisible(true);
-                    return filter;
-                } else { //else hide all non-matching markers
-                    place.marker.setVisible(false);
-                    return filter;
-                }
-            });
+                });
+            } else {
+                return ko.utils.arrayFilter(self.allPlaces(), function (place) {
+                    var filtered = place.name.toLowerCase().indexOf(filter) >= 0;
+                    if (filtered === true) {
+                        place.marker.setVisible(true);
+                    } else {
+                        place.marker.setVisible(false);
+
+                    }
+                });
+            }
         }, self);
+
+        console.log(self.search);
+
 
 
 
