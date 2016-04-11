@@ -1,7 +1,6 @@
+var map, marker;
+
 //Initialize Map
-var marker;
-
-
 function initMap() {
 
     var map = new google.maps.Map(document.getElementById('map-canvas'), { //Map Data
@@ -13,6 +12,15 @@ function initMap() {
         draggable: false,
         scrollwheel: false
     });
+
+
+    function googleError() {
+        alert("Google Has Encountered An Error.  Please Try Again Later");
+        console.log('error');
+    };
+
+
+
 
     var locations = [ //Location Data
         {
@@ -203,8 +211,10 @@ function initMap() {
 
             });
         });
+    };
 
-    }; //ViewModel End
+
+
+    //ViewModel End
     ko.applyBindings(new ViewModel());
-
 }; //initMap End
